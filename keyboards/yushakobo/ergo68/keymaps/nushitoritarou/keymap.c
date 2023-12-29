@@ -67,17 +67,42 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     switch (get_highest_layer(layer_state)) {
         case 1:
             RGB_MATRIX_INDICATOR_SET_COLOR(37, 0, 0, 128);
-            RGB_MATRIX_INDICATOR_SET_COLOR(9, 211, 0, 0);
             break;
         case 2:
             RGB_MATRIX_INDICATOR_SET_COLOR(38, 0, 0, 128);
-            RGB_MATRIX_INDICATOR_SET_COLOR(9, 0, 211, 0);
-            RGB_MATRIX_INDICATOR_SET_COLOR(22, 0, 211, 0);
             break;
         case 3:
             RGB_MATRIX_INDICATOR_SET_COLOR(39, 0, 0, 128);
-            RGB_MATRIX_INDICATOR_SET_COLOR(9, 211, 0, 0);
             break;
     }
     return false;
 }
+#define NUM_PLAIN_LEDS 6
+const uint8_t plain_leds[NUM_PLAIN_LEDS] = {9,22,23,46,59,60};
+
+bool rgb_matrix_indicators_user(void) {
+        switch (get_highest_layer(layer_state)) {
+        case 1:
+            for (int i=0; i<NUM_PLAIN_LEDS; i++) {
+                rgb_matrix_set_color(plain_leds[i], 236, 102, 68) ;
+            } 
+            break;
+        case 2:
+            for (int i=0; i<NUM_PLAIN_LEDS; i++) {
+                rgb_matrix_set_color(plain_leds[i], 69,153,108);
+            } 
+            break;
+        case 3:
+            for (int i=0; i<NUM_PLAIN_LEDS; i++) {
+                rgb_matrix_set_color(plain_leds[i], 211, 0, 0);
+            } 
+            break;
+        default:
+            for (int i=0; i<NUM_PLAIN_LEDS; i++) {
+                rgb_matrix_set_color(plain_leds[i], 170,150,150);
+            } 
+    }
+
+    return true;
+}
+
