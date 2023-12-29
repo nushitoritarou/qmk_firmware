@@ -67,12 +67,16 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     switch (get_highest_layer(layer_state)) {
         case 1:
             RGB_MATRIX_INDICATOR_SET_COLOR(37, 0, 0, 128);
+            RGB_MATRIX_INDICATOR_SET_COLOR(9, 211, 0, 0);
             break;
         case 2:
             RGB_MATRIX_INDICATOR_SET_COLOR(38, 0, 0, 128);
+            RGB_MATRIX_INDICATOR_SET_COLOR(9, 0, 211, 0);
+            RGB_MATRIX_INDICATOR_SET_COLOR(22, 0, 211, 0);
             break;
         case 3:
             RGB_MATRIX_INDICATOR_SET_COLOR(39, 0, 0, 128);
+            RGB_MATRIX_INDICATOR_SET_COLOR(9, 211, 0, 0);
             break;
     }
     return false;
