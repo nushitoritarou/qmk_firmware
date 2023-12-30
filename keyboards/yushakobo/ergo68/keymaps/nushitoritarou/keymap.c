@@ -81,27 +81,27 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 const uint8_t plain_leds[NUM_PLAIN_LEDS] = {9,22,23,46,59,60};
 
 bool rgb_matrix_indicators_user(void) {
-        switch (get_highest_layer(layer_state)) {
+    HSV hsv;
+    switch (get_highest_layer(layer_state)) {
         case 1:
-            for (int i=0; i<NUM_PLAIN_LEDS; i++) {
-                rgb_matrix_set_color(plain_leds[i], 236, 102, 68) ;
-            } 
+            hsv = (HSV){22, 255, 255};
             break;
         case 2:
-            for (int i=0; i<NUM_PLAIN_LEDS; i++) {
-                rgb_matrix_set_color(plain_leds[i], 69,153,108);
-            } 
+            hsv = (HSV){106, 255, 255}; 
             break;
         case 3:
-            for (int i=0; i<NUM_PLAIN_LEDS; i++) {
-                rgb_matrix_set_color(plain_leds[i], 211, 0, 0);
-            } 
+            hsv = (HSV){184, 255, 255}; 
             break;
         default:
-            for (int i=0; i<NUM_PLAIN_LEDS; i++) {
-                rgb_matrix_set_color(plain_leds[i], 170,150,150);
-            } 
+            hsv = (HSV){150, 100, 255}; 
     }
+    if (hsv.v > rgb_matrix_get_val()) {
+        hsv.v = rgb_matrix_get_val();
+    }
+    RGB rgb = hsv_to_rgb(hsv);
+    for (int i=0; i<NUM_PLAIN_LEDS; i++) {
+        rgb_matrix_set_color(plain_leds[i], rgb.r, rgb.g, rgb.b);
+    } 
 
     return true;
 }
